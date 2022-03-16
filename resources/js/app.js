@@ -28,12 +28,20 @@ Vue.component('Todo', require('./components/Todo.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import Vuetify from 'vuetify'
+import VueRouter from 'vue-router'
+import routes from "./routes"
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+Vue.use(VueRouter)
 Vue.use(Vuetify);
 
+
 const app = new Vue({
+    router: new VueRouter({
+        mode: 'hash',
+        routes
+      }),
     vuetify : new Vuetify(),
     el: '#app',
 });
