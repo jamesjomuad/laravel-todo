@@ -2,7 +2,11 @@
     <v-app>
         <v-navigation-drawer app absolute>
             <v-sheet color="grey lighten-4" class="pa-4">
-                <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
+                <v-avatar
+                    class="mb-4"
+                    color="grey darken-1"
+                    size="64"
+                ></v-avatar>
 
                 <div>john@vuetifyjs.com</div>
             </v-sheet>
@@ -10,7 +14,12 @@
             <v-divider></v-divider>
 
             <v-list>
-                <v-list-item v-for="[icon, text, to] in links" :key="icon" link :to="to">
+                <v-list-item
+                    v-for="[icon, text, to] in links"
+                    :key="icon"
+                    link
+                    :to="to"
+                >
                     <v-list-item-icon>
                         <v-icon>{{ icon }}</v-icon>
                     </v-list-item-icon>
@@ -35,22 +44,24 @@
             <router-view></router-view>
         </v-main>
 
-        <form ref="logout" action="/logout" method="POST" ><input type="hidden" name="_token" :value="csrf"></form>
-
+        <form ref="logout" action="/logout" method="POST">
+            <input type="hidden" name="_token" :value="csrf" />
+        </form>
     </v-app>
 </template>
 
 <script>
-    export default {
-        data: () => ({
-            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cards: ['Today', 'Yesterday'],
-            links: [
-                ['mdi-format-list-bulleted', 'Tasks', '/'],
-                ['mdi-check-bold', 'Completed', '/completed'],
-                ['mdi-inbox-arrow-down', 'Archive', '/archive'],
-            ],
-        }),
-    }
-
+export default {
+    data: () => ({
+        csrf: document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content"),
+        cards: ["Today", "Yesterday"],
+        links: [
+            ["mdi-format-list-bulleted", "Tasks", "/"],
+            ["mdi-check-bold", "Completed", "/completed"],
+            ["mdi-inbox-arrow-down", "Archive", "/archive"],
+        ],
+    }),
+};
 </script>

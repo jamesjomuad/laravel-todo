@@ -40,6 +40,7 @@ class ItemController extends Controller
     {
         $item = new Item;
         $item->name = $request->item['name'];
+        $item->description = $request->item['description'];
         $item->save();
         return $item;
     }
