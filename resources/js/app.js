@@ -29,7 +29,10 @@ Vue.component('Todo', require('./components/Todo.vue').default);
  */
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
+import '@mdi/font/css/materialdesignicons.css'
+
 Vue.use(Vuetify);
+
 const app = new Vue({
     vuetify : new Vuetify(),
     el: '#app',

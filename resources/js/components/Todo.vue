@@ -19,6 +19,15 @@
                         <v-list-item-title>{{ text }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
+                <v-list-item link @click="$refs.logout.submit()">
+                    <v-list-item-icon>
+                        <v-icon>mdi-chevron-double-left</v-icon>
+                    </v-list-item-icon>
+
+                    <v-list-item-content>
+                        <v-list-item-title>Logout</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
             </v-list>
         </v-navigation-drawer>
 
@@ -53,6 +62,7 @@
             </v-container>
         </v-main>
 
+        <form ref="logout" action="/logout" method="POST" ><input type="hidden" name="_token" :value="csrf"></form>
 
     </v-app>
 </template>
@@ -60,12 +70,13 @@
 <script>
     export default {
         data: () => ({
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             cards: ['Today', 'Yesterday'],
             links: [
-                ['mdi-send', 'New'],
-                ['mdi-inbox-arrow-down', 'Tasks'],
-                ['mdi-alert-octagon', 'Completed'],
-                ['mdi-delete', 'Archive'],
+                ['mdi-file', 'New'],
+                ['mdi-format-list-bulleted', 'Tasks'],
+                ['mdi-check-bold', 'Completed'],
+                ['mdi-inbox-arrow-down', 'Archive'],
             ],
             items: []
         }),
@@ -75,7 +86,6 @@
                 data
             } = await axios.api.get('items');
             this.items = data
-            // console.table(data)
         },
     }
 
