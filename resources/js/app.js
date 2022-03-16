@@ -1,9 +1,3 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -28,12 +22,20 @@ Vue.component('Todo', require('./components/Todo.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import Vuetify from 'vuetify'
+import VueRouter from 'vue-router'
+import routes from "./routes"
 import 'vuetify/dist/vuetify.min.css'
 import '@mdi/font/css/materialdesignicons.css'
 
+Vue.use(VueRouter)
 Vue.use(Vuetify);
 
+
 const app = new Vue({
+    router: new VueRouter({
+        mode: 'hash',
+        routes
+      }),
     vuetify : new Vuetify(),
     el: '#app',
 });
