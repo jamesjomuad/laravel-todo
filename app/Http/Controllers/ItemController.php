@@ -15,9 +15,23 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Item::orderBy('created_at', 'DESC')->get();
+        $query = Item::orderBy('created_at', 'DESC');
+
+        if($request->has('status'))
+        {
+            if($request->get('status')=='completed')
+            {
+                $query->completed();
+            }
+            else if($request->get('status')=='ongoing')
+            {
+                $query->ongoing();
+            }
+        }
+
+        return $query->get();
     }
 
     /**
