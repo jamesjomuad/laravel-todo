@@ -5404,7 +5404,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['X-Requested-User'] = user.id;
+window.axios.defaults.headers.common['X-Requested-User'] = typeof user == 'undefined' ? 0 : user.id;
 window.axios.api = window.axios.create({
   // headers: { Authorization: `Bearer ${token}` },
   baseURL: "/api"
@@ -5450,6 +5450,11 @@ var routes = [{
   path: '/completed',
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_pages_Completed_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/Completed.vue */ "./resources/js/pages/Completed.vue"));
+  }
+}, {
+  path: '/archive',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ "resources_js_pages_Archive_vue").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/Archive.vue */ "./resources/js/pages/Archive.vue"));
   }
 }];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
@@ -90420,7 +90425,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_pages_Task_vue":1,"resources_js_pages_Create_vue":1,"resources_js_pages_Completed_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_pages_Task_vue":1,"resources_js_pages_Create_vue":1,"resources_js_pages_Completed_vue":1,"resources_js_pages_Archive_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -18,21 +18,28 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $query = $this->user->items()->orderBy('created_at', 'DESC');
+        $items = $this->user->items();
+
+        $items->orderBy('created_at', 'DESC');
 
         if($request->has('status'))
         {
             if($request->get('status')=='completed')
             {
-                $query->completed();
+                $items->completed();
             }
             else if($request->get('status')=='ongoing')
             {
-                $query->ongoing();
+                $items->ongoing();
+            }
+            else if($request->get('status')=='deleted')
+            {
+                $items->onlyTrashed()->orderBy('deleted_at', 'DESC');
             }
         }
 
-        return $query->get();
+
+        return $items->get();
     }
 
     /**
