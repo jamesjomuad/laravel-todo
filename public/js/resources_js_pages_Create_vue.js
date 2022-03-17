@@ -116,9 +116,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.$router.push("/");
                 }
 
-                console.log(response);
-
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
