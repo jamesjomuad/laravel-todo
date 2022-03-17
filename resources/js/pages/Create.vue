@@ -15,6 +15,7 @@
                 label="Description"
                 auto-grow
                 v-model="description"
+                :rules="descriptionRules"
             ></v-textarea>
 
             <v-btn
@@ -42,12 +43,15 @@ export default {
         name: "",
         nameRules: [
             (v) => !!v || "Name is required",
-            (v) =>
-                (v && v.length >= 5) ||
-                "Name must be greater than 5 characters",
+            (v) => (v && v.length >= 5) || "Name must be greater than 5 characters",
+            (v) => (v && v.length <= 60) || "Name too long!",
         ],
         checkbox: false,
         description: "",
+        descriptionRules: [
+            (v) => (v && v.length >= 20) || "Name must be greater than 5 characters",
+            (v) => (v && v.length <= 240) || "Name too long!",
+        ],
     }),
 
     methods: {
