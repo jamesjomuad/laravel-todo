@@ -67,6 +67,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -76,9 +77,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return !!v || "Name is required";
       }, function (v) {
         return v && v.length >= 5 || "Name must be greater than 5 characters";
+      }, function (v) {
+        return v && v.length <= 60 || "Name too long!";
       }],
       checkbox: false,
-      description: ""
+      description: "",
+      descriptionRules: [function (v) {
+        return v && v.length >= 20 || "Name must be greater than 5 characters";
+      }, function (v) {
+        return v && v.length <= 240 || "Name too long!";
+      }]
     };
   },
   methods: {
@@ -1021,6 +1029,7 @@ var render = function () {
               filled: "",
               label: "Description",
               "auto-grow": "",
+              rules: _vm.descriptionRules,
             },
             model: {
               value: _vm.description,
