@@ -5,9 +5,9 @@
                 <v-col cols="12">
                     <v-card>
                         <!-- <v-subheader>Today</v-subheader> -->
-                        <v-list two-line>
+                        <v-list two-line color="#64B5F6">
                             <template v-for="(item, n) in items">
-                                <v-list-item :key="n">
+                                <v-list-item :key="n" >
                                     <v-list-item-content>
                                         <v-list-item-title>{{
                                             item.name

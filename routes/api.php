@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/items', [ItemController::class,'index']);
+// ->middleware('auth:api');
 
 Route::prefix('/item')->group(function(){
     // Create

@@ -18,6 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        // No more time for json web token
+        // Temporary
+        user = {!! Auth::user()->toJSON() !!}
+    </script>
 </head>
 <body>
     <div id="app">

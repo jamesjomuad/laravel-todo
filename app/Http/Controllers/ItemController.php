@@ -6,10 +6,21 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Carbon;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 use App\Models\Item;
 
 class ItemController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        //  Temporary
+        $user = User::find($request->header('X-Requested-User'));
+        Auth::login($user);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +28,7 @@ class ItemController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Item::orderBy('created_at', 'DESC');
+        $query = auth()->user()->items()->orderBy('created_at', 'DESC');
 
         if($request->has('status'))
         {

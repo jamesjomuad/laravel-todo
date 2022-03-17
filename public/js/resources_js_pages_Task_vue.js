@@ -84,6 +84,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -101,7 +104,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios.api.get("items");
+              return axios.api.get("items", {
+                params: {
+                  status: "ongoing"
+                }
+              });
 
             case 2:
               _yield$axios$api$get = _context.sent;
@@ -117,7 +124,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    onCheckbox: function onCheckbox(state, item) {
+    onCheckbox: function onCheckbox(state, item, key) {
+      var _this2 = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
@@ -133,7 +142,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 response = _context2.sent;
-                console.log(response);
+
+                _this2.items.splice(key, 1);
 
               case 4:
               case "end":
@@ -1045,72 +1055,97 @@ var render = function () {
                 "v-col",
                 { attrs: { cols: "12" } },
                 [
-                  _c(
-                    "v-card",
-                    [
-                      _c("v-subheader", [_vm._v("Today")]),
-                      _vm._v(" "),
-                      _c(
-                        "v-list",
-                        { attrs: { "two-line": "" } },
+                  _vm.items.length
+                    ? _c(
+                        "v-card",
                         [
-                          _vm._l(_vm.items, function (item, n) {
-                            return [
-                              _c(
-                                "v-list-item",
-                                { key: n },
-                                [
+                          _c("v-subheader", [_vm._v("Today")]),
+                          _vm._v(" "),
+                          _c(
+                            "v-list",
+                            { attrs: { "two-line": "" } },
+                            [
+                              _vm._l(_vm.items, function (item, n) {
+                                return [
                                   _c(
-                                    "v-list-item-action",
+                                    "v-list-item",
+                                    { key: n },
                                     [
-                                      _c("v-checkbox", {
-                                        on: {
-                                          change: function ($event) {
-                                            return _vm.onCheckbox($event, item)
-                                          },
-                                        },
-                                      }),
+                                      _c(
+                                        "v-list-item-action",
+                                        [
+                                          _c("v-checkbox", {
+                                            key: item.id,
+                                            on: {
+                                              change: function ($event) {
+                                                return _vm.onCheckbox(
+                                                  $event,
+                                                  item,
+                                                  n
+                                                )
+                                              },
+                                            },
+                                          }),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v(_vm._s(item.name)),
+                                          ]),
+                                          _vm._v(" "),
+                                          item.description
+                                            ? _c("v-list-item-subtitle", [
+                                                _vm._v(
+                                                  "\n                                        " +
+                                                    _vm._s(item.description) +
+                                                    "\n                                    "
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                        ],
+                                        1
+                                      ),
                                     ],
                                     1
                                   ),
                                   _vm._v(" "),
-                                  _c(
-                                    "v-list-item-content",
-                                    [
-                                      _c("v-list-item-title", [
-                                        _vm._v(_vm._s(item.name)),
-                                      ]),
-                                      _vm._v(" "),
-                                      item.description
-                                        ? _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "\n                                        " +
-                                                _vm._s(item.description) +
-                                                "\n                                    "
-                                            ),
-                                          ])
-                                        : _vm._e(),
-                                    ],
-                                    1
-                                  ),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              n !== _vm.items.length - 1
-                                ? _c("v-divider", {
-                                    key: "divider-" + n,
-                                    attrs: { inset: "" },
-                                  })
-                                : _vm._e(),
-                            ]
-                          }),
+                                  n !== _vm.items.length - 1
+                                    ? _c("v-divider", {
+                                        key: "divider-" + n,
+                                        attrs: { inset: "" },
+                                      })
+                                    : _vm._e(),
+                                ]
+                              }),
+                            ],
+                            2
+                          ),
                         ],
-                        2
-                      ),
-                    ],
-                    1
-                  ),
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.items.length
+                    ? _c(
+                        "v-alert",
+                        {
+                          attrs: {
+                            border: "right",
+                            color: "blue-grey",
+                            dark: "",
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    NO Task!\n                "
+                          ),
+                        ]
+                      )
+                    : _vm._e(),
                 ],
                 1
               ),

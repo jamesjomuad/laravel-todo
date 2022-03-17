@@ -10,20 +10,19 @@
             </v-row>
             <v-row>
                 <v-col cols="12">
-                    <v-card>
+                    <v-card v-if="items.length">
                         <v-subheader>Today</v-subheader>
                         <v-list two-line>
                             <template v-for="(item, n) in items">
                                 <v-list-item :key="n">
                                     <v-list-item-action>
-                                        <v-checkbox @change="onCheckbox($event,item)"></v-checkbox>
+                                        <v-checkbox
+                                            @change="
+                                                onCheckbox($event, item, n)
+                                            "
+                                            :key="item.id"
+                                        ></v-checkbox>
                                     </v-list-item-action>
-                                    <!-- <v-list-item-avatar color="grey darken-1">
-                                        <img
-                                            src="https://picsum.photos/200"
-                                            alt=""
-                                        />
-                                    </v-list-item-avatar> -->
 
                                     <v-list-item-content>
                                         <v-list-item-title>{{
@@ -46,6 +45,10 @@
                             </template>
                         </v-list>
                     </v-card>
+
+                    <v-alert v-if="!items.length" border="right" color="blue-grey" dark>
+                        NO Task!
+                    </v-alert>
                 </v-col>
             </v-row>
         </v-container>
@@ -59,20 +62,22 @@ export default {
     }),
 
     async created() {
-        const { data } = await axios.api.get("items");
+        const { data } = await axios.api.get("items", {
+            params: { status: "ongoing" },
+        });
         this.items = data;
     },
 
     methods: {
-        async onCheckbox(state, item){
+        async onCheckbox(state, item, key) {
             const response = await axios.api.put(`/item/${item.id}`, {
                 item: {
                     completed: state,
                 },
             });
 
-            console.log(response)
-        }
+            this.items.splice(key, 1);
+        },
     },
 };
 </script>

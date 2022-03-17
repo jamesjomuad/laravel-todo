@@ -1,14 +1,12 @@
 <template>
     <v-app>
         <v-navigation-drawer app absolute>
-            <v-sheet color="grey lighten-4" class="pa-4">
-                <v-avatar
-                    class="mb-4"
-                    color="grey darken-1"
-                    size="64"
-                ></v-avatar>
+            <v-sheet color="grey lighten-4" class="pa-4 text-center">
+                <v-avatar class="mb-4" color="grey darken-1" size="64">
+                    <img src="https://placeimg.com/200/200/people" />
+                </v-avatar>
 
-                <div>john@vuetifyjs.com</div>
+                <div>{{ user.email }}</div>
             </v-sheet>
 
             <v-divider></v-divider>
@@ -53,6 +51,7 @@
 <script>
 export default {
     data: () => ({
+        user: null,
         csrf: document
             .querySelector('meta[name="csrf-token"]')
             .getAttribute("content"),
@@ -63,5 +62,9 @@ export default {
             ["mdi-inbox-arrow-down", "Archive", "/archive"],
         ],
     }),
+
+    created() {
+        this.user = user;
+    },
 };
 </script>

@@ -977,7 +977,7 @@ var render = function () {
                     [
                       _c(
                         "v-list",
-                        { attrs: { "two-line": "" } },
+                        { attrs: { "two-line": "", color: "#64B5F6" } },
                         [
                           _vm._l(_vm.items, function (item, n) {
                             return [
