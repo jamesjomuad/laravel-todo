@@ -69,10 +69,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      items: []
+      items: [],
+      snackbar: {
+        state: null,
+        message: null
+      }
     };
   },
   created: function created() {
@@ -104,6 +144,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
+  },
+  methods: {
+    onTrash: function onTrash(item, key) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.api["delete"]("/item/".concat(item.id));
+
+              case 2:
+                res = _context2.sent;
+
+                if (res.status == 200) {
+                  _this2.items.splice(key, 1);
+
+                  _this2.snackbar.state = true;
+                  _this2.snackbar.message = "Deleted successfully!";
+                }
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
   }
 });
 
@@ -992,9 +1064,11 @@ var render = function () {
                                       _c(
                                         "v-list-item-content",
                                         [
-                                          _c("v-list-item-title", [
-                                            _vm._v(_vm._s(item.name)),
-                                          ]),
+                                          _c(
+                                            "v-list-item-title",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v(_vm._s(item.name))]
+                                          ),
                                           _vm._v(" "),
                                           item.description
                                             ? _c("v-list-item-subtitle", [
@@ -1005,6 +1079,42 @@ var render = function () {
                                                 ),
                                               ])
                                             : _vm._e(),
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-item-icon",
+                                        [
+                                          _c(
+                                            "v-btn",
+                                            {
+                                              staticClass: "mx-2",
+                                              attrs: {
+                                                fab: "",
+                                                dark: "",
+                                                small: "",
+                                                color: "primary",
+                                              },
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.onTrash(item, n)
+                                                },
+                                              },
+                                            },
+                                            [
+                                              _c(
+                                                "v-icon",
+                                                { attrs: { dark: "" } },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                            mdi-beaker-remove\n                                        "
+                                                  ),
+                                                ]
+                                              ),
+                                            ],
+                                            1
+                                          ),
                                         ],
                                         1
                                       ),
@@ -1047,6 +1157,57 @@ var render = function () {
               ),
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "action",
+                  fn: function (ref) {
+                    var attrs = ref.attrs
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._b(
+                          {
+                            attrs: { color: "blue", text: "" },
+                            on: {
+                              click: function ($event) {
+                                _vm.snackbar.state = false
+                              },
+                            },
+                          },
+                          "v-btn",
+                          attrs,
+                          false
+                        ),
+                        [
+                          _vm._v(
+                            "\n                    Close\n                "
+                          ),
+                        ]
+                      ),
+                    ]
+                  },
+                },
+              ]),
+              model: {
+                value: _vm.snackbar.state,
+                callback: function ($$v) {
+                  _vm.$set(_vm.snackbar, "state", $$v)
+                },
+                expression: "snackbar.state",
+              },
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.snackbar.message) +
+                  "\n\n            "
+              ),
+            ]
           ),
         ],
         1

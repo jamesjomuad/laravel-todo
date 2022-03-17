@@ -5,7 +5,7 @@
                 <v-col cols="12">
                     <v-card v-if="items.length">
                         <!-- <v-subheader>Today</v-subheader> -->
-                        <v-list two-line color="#64B5F6">
+                        <v-list two-line color="grey">
                             <template v-for="(item, n) in items">
                                 <v-list-item :key="n">
                                     <v-list-item-content>
@@ -19,20 +19,7 @@
                                             {{ item.description }}
                                         </v-list-item-subtitle>
                                     </v-list-item-content>
-                                    <v-list-item-icon>
-                                        <v-btn
-                                            class="mx-2"
-                                            fab
-                                            dark
-                                            small
-                                            color="primary"
-                                            @click="onTrash(item, n)"
-                                        >
-                                            <v-icon dark>
-                                                mdi-beaker-remove
-                                            </v-icon>
-                                        </v-btn>
-                                    </v-list-item-icon>
+
                                 </v-list-item>
 
                                 <v-divider
@@ -50,7 +37,7 @@
                         color="blue-grey"
                         dark
                     >
-                        No task completed!
+                        Empty!
                     </v-alert>
                 </v-col>
             </v-row>
@@ -85,7 +72,7 @@ export default {
 
     async created() {
         const { data } = await axios.api.get("items", {
-            params: { status: "completed" },
+            params: { status: "deleted" },
         });
         this.items = data;
     },

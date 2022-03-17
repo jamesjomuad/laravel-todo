@@ -1093,9 +1093,11 @@ var render = function () {
                                       _c(
                                         "v-list-item-content",
                                         [
-                                          _c("v-list-item-title", [
-                                            _vm._v(_vm._s(item.name)),
-                                          ]),
+                                          _c(
+                                            "v-list-item-title",
+                                            { staticClass: "font-weight-bold" },
+                                            [_vm._v(_vm._s(item.name))]
+                                          ),
                                           _vm._v(" "),
                                           item.description
                                             ? _c("v-list-item-subtitle", [

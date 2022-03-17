@@ -68,8 +68,6 @@ export default {
             if (response.statusText == "Created") {
                 this.$router.push("/");
             }
-
-            console.log(response);
         },
         reset() {
             this.$refs.form.reset();
