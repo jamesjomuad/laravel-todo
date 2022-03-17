@@ -3,11 +3,11 @@
         <v-container class="py-8 px-6">
             <v-row>
                 <v-col cols="12">
-                    <v-card>
+                    <v-card v-if="items.length">
                         <!-- <v-subheader>Today</v-subheader> -->
                         <v-list two-line color="#64B5F6">
                             <template v-for="(item, n) in items">
-                                <v-list-item :key="n" >
+                                <v-list-item :key="n">
                                     <v-list-item-content>
                                         <v-list-item-title>{{
                                             item.name
@@ -28,6 +28,9 @@
                             </template>
                         </v-list>
                     </v-card>
+                    <v-alert v-if="!items.length" border="right" color="blue-grey" dark>
+                        No task completed!
+                    </v-alert>
                 </v-col>
             </v-row>
         </v-container>
@@ -41,9 +44,10 @@ export default {
     }),
 
     async created() {
-        const { data } = await axios.api.get("items", { params: { status: "completed" } });
+        const { data } = await axios.api.get("items", {
+            params: { status: "completed" },
+        });
         this.items = data;
     },
-
 };
 </script>

@@ -66,6 +66,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -972,53 +975,73 @@ var render = function () {
                 "v-col",
                 { attrs: { cols: "12" } },
                 [
-                  _c(
-                    "v-card",
-                    [
-                      _c(
-                        "v-list",
-                        { attrs: { "two-line": "", color: "#64B5F6" } },
+                  _vm.items.length
+                    ? _c(
+                        "v-card",
                         [
-                          _vm._l(_vm.items, function (item, n) {
-                            return [
-                              _c(
-                                "v-list-item",
-                                { key: n },
-                                [
+                          _c(
+                            "v-list",
+                            { attrs: { "two-line": "", color: "#64B5F6" } },
+                            [
+                              _vm._l(_vm.items, function (item, n) {
+                                return [
                                   _c(
-                                    "v-list-item-content",
+                                    "v-list-item",
+                                    { key: n },
                                     [
-                                      _c("v-list-item-title", [
-                                        _vm._v(_vm._s(item.name)),
-                                      ]),
-                                      _vm._v(" "),
-                                      item.description
-                                        ? _c("v-list-item-subtitle", [
-                                            _vm._v(
-                                              "\n                                        " +
-                                                _vm._s(item.description) +
-                                                "\n                                    "
-                                            ),
-                                          ])
-                                        : _vm._e(),
+                                      _c(
+                                        "v-list-item-content",
+                                        [
+                                          _c("v-list-item-title", [
+                                            _vm._v(_vm._s(item.name)),
+                                          ]),
+                                          _vm._v(" "),
+                                          item.description
+                                            ? _c("v-list-item-subtitle", [
+                                                _vm._v(
+                                                  "\n                                        " +
+                                                    _vm._s(item.description) +
+                                                    "\n                                    "
+                                                ),
+                                              ])
+                                            : _vm._e(),
+                                        ],
+                                        1
+                                      ),
                                     ],
                                     1
                                   ),
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              n !== _vm.items.length - 1
-                                ? _c("v-divider", { key: "divider-" + n })
-                                : _vm._e(),
-                            ]
-                          }),
+                                  _vm._v(" "),
+                                  n !== _vm.items.length - 1
+                                    ? _c("v-divider", { key: "divider-" + n })
+                                    : _vm._e(),
+                                ]
+                              }),
+                            ],
+                            2
+                          ),
                         ],
-                        2
-                      ),
-                    ],
-                    1
-                  ),
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  !_vm.items.length
+                    ? _c(
+                        "v-alert",
+                        {
+                          attrs: {
+                            border: "right",
+                            color: "blue-grey",
+                            dark: "",
+                          },
+                        },
+                        [
+                          _vm._v(
+                            "\n                    No task completed!\n                "
+                          ),
+                        ]
+                      )
+                    : _vm._e(),
                 ],
                 1
               ),
